@@ -1,0 +1,25 @@
+---
+title: "My website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+
+---
+
+# This is Yali's website
+
+![](images/Welcome.jpg)
+
+# About me
+* Name: Yali Zhai
+* Age: 22
+* Gender: Female
+
+You can know more about my academic and professional experience through the link
+below or the "About" icon on the upper right conner.
+
+[My resume](About.html)
+
+# Link to my Linkedin
+[My Linkedin](https://www.linkedin.com/in/yali-zhai-0956951a3/)
