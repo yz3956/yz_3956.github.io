@@ -1,0 +1,68 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+
+library(flexdashboard)
+```
+
+```{r include=FALSE}
+data("rest_inspec")
+
+rest_inspec_df = 
+  rest_inspec %>% 
+  select(boro, cuisine_description, score, grade, grade_date) %>% 
+  filter(
+    !is.na(grade),
+    boro == "MANHATTAN",
+    cuisine_description %in% c("American", "French", "Chinese", "Italian", "Korean"),
+    score %in% 20:50
+  )
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+rest_inspec_df %>% 
+  count(grade) %>% 
+  mutate(grade = fct_reorder(grade, n)) %>% 
+  plot_ly(
+     x = ~grade, y = ~n, type = "bar",
+     color = ~grade, alpha = 0.5)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+rest_inspec_df %>% 
+  mutate(cuisine_description = fct_reorder(cuisine_description, score)) %>% 
+  plot_ly(
+     x = ~cuisine_description, y = ~score, type = "violin",
+     color = ~cuisine_description )
+```
+
+### Chart C
+
+```{r}
+rest_inspec_df %>% 
+  mutate(grade = fct_reorder(grade, score)) %>% 
+  plot_ly(
+     x = ~grade, y = ~score, type = "box",
+     color = ~grade )
+```
+
