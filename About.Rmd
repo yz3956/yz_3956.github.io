@@ -1,0 +1,26 @@
+---
+title: "My Resume"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+## This is Yali's Resume
+
+### Education
+* Xi'an Jiangtong Liverpool University (2016.09 - 2018.06)
+Applied Mathematics(BS)
+
+* University of Liverpool (2018.09 - 2020.06)
+Mathematics(BS)
+
+* Columbia University (2020.09 - 2022.06)
+Biostatistics(MS)
+
+### Work Experience
+* Hua Medicine (2018.06 - 2018.08)
+Position: Data Department Intern
+
+* Mabpharm (2020.07 - 2020.09)
+Position: CTA
+

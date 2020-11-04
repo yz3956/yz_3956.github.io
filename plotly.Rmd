@@ -1,0 +1,63 @@
+---
+title: "Plotly Examples"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+## Some examples of plotly
+
+First import NYC restaurant spections data
+
+```{r}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+```
+
+```{r include=FALSE}
+data("rest_inspec")
+
+rest_inspec_df = 
+  rest_inspec %>% 
+  select(boro, cuisine_description, score, grade, grade_date) %>% 
+  filter(
+    !is.na(grade),
+    boro == "MANHATTAN",
+    cuisine_description %in% c("American", "French", "Chinese", "Italian", "Korean"),
+    score %in% 20:50
+  )
+```
+
+# Plotly plots
+
+## barplot
+```{r}
+rest_inspec_df %>% 
+  count(grade) %>% 
+  mutate(grade = fct_reorder(grade, n)) %>% 
+  plot_ly(
+     x = ~grade, y = ~n, type = "bar",
+     color = ~grade, alpha = 0.5)
+```
+
+
+## violinplot
+```{r}
+rest_inspec_df %>% 
+  mutate(cuisine_description = fct_reorder(cuisine_description, score)) %>% 
+  plot_ly(
+     x = ~cuisine_description, y = ~score, type = "violin",
+     color = ~cuisine_description )
+```
+
+
+## boxplot
+```{r}
+rest_inspec_df %>% 
+  mutate(grade = fct_reorder(grade, score)) %>% 
+  plot_ly(
+     x = ~grade, y = ~score, type = "box",
+     color = ~grade )
+```
+
